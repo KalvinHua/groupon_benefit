@@ -1,0 +1,68 @@
+<!--包含头部文件-->
+{include file="public/header" /}
+<body>
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f; 首页 <span class="c-gray en">&gt;</span> 推荐位管理 <span class="c-gray en">&gt;</span> 推荐位信息</i>
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+		<i class="Hui-iconfont">&#xe68f;</i>
+	</a>
+</nav>
+<div class="cl pd-5 bg-1 bk-gray mt-20"> 推荐位信息</div>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-article-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>标题：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text"   class="input-text" value="{$featuredData.title}" placeholder="" id="" name="title" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="row cl">
+              <label class="form-label col-xs-4 col-sm-2">推荐图：</label>
+              <div class="formControls col-xs-8 col-sm-8">
+                <img style="width: 300px;height: auto;display: inline-block" src="{$featuredData.image}" width="150" height="150">
+              </div>
+        </div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>所属分类：</label>
+			<div class="formControls col-xs-8 col-sm-8"> <span class="select-box">
+				<select name="type" class="select" disabled="disabled">
+					{foreach $types as $key=>$value}
+					<option value="{$key}"
+						{if $key==$featuredData.type}
+							selected="selected"
+						{/if}
+					>{$value}</option>
+					{/foreach}
+				</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">url：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text" value="{$featuredData.url}" placeholder="" id="" name="url" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">描述：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text" value="{$featuredData.description}" name="description" readonly="readonly">
+			</div>
+		</div>
+	</form>
+</article>
+<script>
+	/***定义全局变量***/
+    var SCOPE ={
+        'city_url' : "{:url('api/city/getCityByParentId')}",
+        'category_url' : "{:url('api/category/getCategoryByParentId')}",
+        'uploadify_swf' : "/static/admin/uploadify/uploadify.swf",
+        'image_upload' : "{:url('api/image/upload')}",
+        'usrCheck_url': "{:url('register/checkName')}",
+    }
+</script>
+<!--包含头部文件-->
+{include file="public/footer" /}

@@ -1,0 +1,15 @@
+<!--包含头部文件-->
+{include file="public/header" /}
+<div class="cl pd-5 bg-1 bk-gray mt-30">
+    {if $detail}
+    <h2 class="text-c">{$detail.status|bisRegister|raw}</h2>
+    {else if}
+    <h2 class="text-c">不存在该入驻申请情况</h2>
+    {/if}
+</div>
+<div class="cl pd-5 bg-1 bk-gray mt-30">
+    <h4 class="text-c"><a href="{:url('register/index')}">点击跳转回注册页面</a></h4>
+</div>
+{include file="public/footer" /}
+</body>
+</html>

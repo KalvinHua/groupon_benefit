@@ -1,0 +1,33 @@
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/static/admin/hui/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/hui/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/static/admin/hui/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/static/admin/hui/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/admin/hui/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<script type="text/javascript">
+    function myselfinfo(){
+        layer.open({
+            type: 1,
+            area: ['300px','200px'],
+            fix: false, //不固定
+            maxmin: true,
+            shade:0.4,
+            title: '查看信息',
+            content: '<div>管理员信息</div>'
+        });
+    }
+</script>
+<script>
+    var SCOPE ={
+        'city_url' : "{:url('api/city/getCityByParentId')}",
+        'category_url' : "{:url('api/category/getCategoryByParentId')}",
+        'uploadify_swf' : "/static/admin/uploadify/uploadify.swf",
+        'image_upload' : "{:url('api/image/upload')}",
+        'usrCheck_url': "{:url('register/checkName')}",
+    }
+</script>
+<script type="text/javascript" src="/static/admin/js/common.js"></script>
+<script type="text/javascript" src="/static/admin/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/image.js"></script>

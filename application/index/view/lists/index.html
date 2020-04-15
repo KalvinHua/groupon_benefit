@@ -1,0 +1,164 @@
+{include file="public/head,public/nav"}
+
+<div class="page-body">
+    <div class="filter-bg">
+        <div class="filter-wrap">
+            <div class="w-filter-ab-test">
+                <div class="w-filter-top-nav clearfix" style="margin:12px">
+
+
+                </div>
+
+                <div class="filter-wrapper">
+                    <div class="normal-filter ">
+                        <div class="w-filter-normal-ab  filter-list-ab">
+                            <h5 class="filter-label-ab">分类</h5>
+                            <!--<span class="filter-all-ab">-->
+                                    <!--<a class="w-filter-item-ab  item-all-auto-ab">-->
+                                        <!--<span-->
+                                            <!--class="item-content-->
+                                            <!--{if $id==0}-->
+                                            <!--filter-active-all-ab-->
+                                            <!--{/if}-->
+                                            <!--">全部-->
+                                        <!--</span>-->
+                                    <!--</a>-->
+                             <!--</span>-->
+                            <div class="j-filter-items-wrap-ab filter-items-wrap-ab">
+                                <div class="j-filter-items-ab filter-items-ab filter-content-ab">
+                                    <a href="{:url('lists/index')}" class="w-filter-item-ab">
+                                        <span class="item-content
+                                            {if $id==0}
+                                            filter-active-all-ab
+                                            {/if}
+                                            ">全部
+                                        </span>
+                                    </a>
+                                    {volist name="firstCategories" id="vo"}
+                                    <a href="{:url('lists/index',['id'=>$vo.id])}" class="w-filter-item-ab">
+                                        <span class="item-content
+                                        {if $vo.id==$secondCategoryParentID}
+                                        filter-active-all-ab
+                                        {/if}
+                                        ">{$vo.name}</span>
+                                    </a>
+                                    {/volist}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {notempty name="secondCategories"}
+                <div class="filter-wrapper">
+                    <div class="normal-filter ">
+                        <div class="w-filter-normal-ab  filter-list-ab">
+                            <h5 class="filter-label-ab">子分类</h5>
+                            <div class="j-filter-items-wrap-ab filter-items-wrap-ab">
+                                <div class="j-filter-items-ab filter-items-ab filter-content-ab">
+                                    <a href="{:url('lists/index',['id'=>$secondCategoryParentID])}" class="w-filter-item-ab">
+                                        <span class="item-content
+                                            {if $secondAll_flag==1}
+                                            filter-active-all-ab
+                                            {/if}
+                                            ">全部
+                                        </span>
+                                    </a>
+                                    {volist name="secondCategories" id="vo"}
+                                    <a href="{:url('lists/index',['id'=>$vo.id])}" class="w-filter-item-ab">
+                                        <span class="item-content
+                                            {if $vo.id==$id}
+                                            filter-active-all-ab
+                                            {/if}
+                                        ">{$vo.name}</span>
+                                    </a>
+                                    {/volist}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/notempty}
+            </div>
+            <div class="w-sort-bar">
+                <div class="bar-area"
+                     style="position: relative; left: 0px; margin-left: 0px; margin-right: 0px; margin-top: 0px; top: 0px;">
+                        <span class="sort-area">
+                            <a href="{:url('lists/index',['id'=>$id])}" class="sort-default {if $orderflag==''}sort-default-active{/if}">默认</a>
+                            <a href="{:url('lists/index',['id'=>$id,'order_sales'=>1])}" class="sort-item sort-down {if $orderflag=='order_sales'}sort-default-active{/if}" title="点击按销量降序排序">销量↓</a>
+                            <a href="{:url('lists/index',['id'=>$id,'order_price'=>1])}" class="sort-item price-default price {if $orderflag=='order_price'}sort-default-active{/if}" title="点击按价格降序排序">价格↓</a>
+                            <a href="{:url('lists/index',['id'=>$id,'order_time'=>1])}" class="sort-item sort-up {if $orderflag=='order_time'}sort-default-active{/if}" title="发布时间由近到远">最新发布↑</a>
+                        </span>
+
+                </div>
+            </div>
+            <ul class="itemlist eight-row-height">
+                {volist name="commodities" id="value"}
+                <li class="j-card">
+                    <a>
+                        <div class="imgbox">
+                            <ul class="marketing-label-container">
+                                <li class="marketing-label marketing-free-appoint"></li>
+                            </ul>
+                            <div class="range-area">
+                                <div class="range-bg"></div>
+                                <div class="range-inner">
+                                    <span class="white-locate"></span>
+                                    {$value.city_path|getCityName|raw}
+                                </div>
+                            </div>
+                            <div class="borderbox">
+                                <img src="{$value.image}" />
+                            </div>
+                        </div>
+                    </a>
+                    <div class="contentbox">
+                        <a>
+                            <a href="{:url('detail/index',['id'=>$value.id])}" target="_self">
+                                <div class="header">
+                                    <h4 class="title ">共{$value.store_ids|countStores}店通用</h4>
+                                </div>
+                                <p>{$value.name}</p>
+                            </a>
+                            <div class="add-info"></div>
+                            <div class="pinfo">
+                                <span class="price"><span class="moneyico">¥</span>{$value.current_price}</span>
+                                <span class="ori-price"><span class="price-line">原价¥<span>{$value.origin_price}</span></span></span>
+                            </div>
+                            <div class="footer">
+                                <span class="sold">已售{$value.buy_count}</span>
+                                <div class="bottom-border"></div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                {/volist}
+            </ul>
+        </div>
+    </div>
+    <div class="pagenation_foot" style="margin: 0 auto;text-align: center;">
+        {:pagination($commodities)}
+    </div>
+</div>
+
+<div class="footer-content">
+    <div class="copyright-info">
+        <p>Copyright benefit团购</p>
+    </div>
+</div>
+<script>
+    $(".tab-item-wrap").click(function () {
+        var index = $(".tab-item-wrap").index(this);
+        $(".tab-item-wrap").removeClass("selected");
+        $(".district-cont-wrap").css({display: "none"});
+        $(this).addClass("selected");
+        $(".district-cont-wrap").eq(index).css({display: "block"});
+    });
+
+    $(".sort-area a").click(function () {
+        $(".sort-area a").removeClass("sort-default-active").css({color: "#666"});
+        $(this).addClass("sort-default-active").css({color: "#ec803e"});
+    });
+</script>
+</body>
+</html>
